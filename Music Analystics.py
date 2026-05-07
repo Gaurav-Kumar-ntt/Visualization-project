@@ -2,6 +2,21 @@
 🎵 Music Streaming Analytics Dashboard
 DataDNA Challenge — 2021-2024
 """
+import subprocess, sys
+
+def _ensure(pkg):
+    try:
+        __import__(pkg.split("[")[0].replace("-","_"))
+    except ImportError:
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", pkg, "-q"],
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+        )
+
+_ensure("plotly")
+_ensure("pandas")
+_ensure("numpy")
+
 import streamlit as st
 import pandas as pd
 import numpy as np
